@@ -12,8 +12,8 @@ class BaseSetting(object):
 
 class GlobalSettings(object):
     #全局配置，后台管理标题和页脚
-    site_title = "仙剑奇侠传"
-    site_footer = "http://www.cnblogs.com/derek1184405959/"
+    site_title = "杭州立幼网络科技有限公司"
+    site_footer = "www.hzliyou.cn"
     #菜单收缩
     menu_style = "accordion"
 
