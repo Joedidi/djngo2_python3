@@ -18,10 +18,19 @@ from django.urls import path, include
 import xadmin
 from django.views.static import serve
 from djngo2_python3.settings import MEDIA_ROOT
+from goods.view_base import GoodsListView
+from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),
     #文件
     path('media/<path:path>', serve, {'document_root': MEDIA_ROOT}),
+
+    path('goods/', GoodsListView.as_view(), name='goods-list'),
+
+    # drf 文档，title自定义
+    path('docs', include_docs_urls(title='杭州立幼网络科技有限公司')),
+
+    path('api-auth/', include('rest_framework.urls')),
 ]

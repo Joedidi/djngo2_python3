@@ -9,8 +9,8 @@ from .models import IndexAd
 
 class GoodsAdmin(object):
     # 显示的列
-    list_display = ["name", "clicks_num", "sold_num", "fav_num", "goods_num", "market_price",
-                    "shop", "goods_brief", "goods_desc", "is_new", "is_hot", "add_time"]
+    list_display = ["name", "category_name", "click_num", "sold_num", "fav_num", "goods_num", "market_price",
+                    "shop_price", "goods_brief", "goods_desc", "is_new", "is_hot", "add_time"]
 
     # 可以搜索的字段
     search_fields = ['name',]
@@ -33,7 +33,7 @@ class GoodsAdmin(object):
 
 class GoodsCategoryAdmin(object):
     list_display = ["name", "category_type", "parent_category", "add_time"]
-    list_filter = ["category", "parent_category", "name"]
+    list_filter = ["parent_category", "name"]
     search_fields = ["name"]
 
 

@@ -38,10 +38,10 @@ class GoodsCategoryBrand(models.Model):
     某一大类下的宣传商标
     """
     category = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, related_name='brands', null=True, blank=True, verbose_name="商品类目")
-    name = models.CharField("品牌名",default="", max_length=30,help_text="品牌名")
-    desc = models.TextField("品牌描述",default="", max_length=200,help_text="品牌描述")
+    name = models.CharField("品牌名", default="", max_length=30, help_text="品牌名")
+    desc = models.TextField("品牌描述", default="", max_length=200, help_text="品牌描述")
     image = models.ImageField(max_length=200, upload_to="brands/")
-    add_time = models.DateTimeField("添加时间",default=datetime.now)
+    add_time = models.DateTimeField("添加时间", default=datetime.now)
 
     class Meta:
         verbose_name = "宣传品牌"
@@ -56,7 +56,8 @@ class Goods(models.Model):
     """
     商品
     """
-    models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, verbose_name="商品类目")
+    goodcegory = GoodsCategory()
+    category_name = models.ForeignKey(GoodsCategory, on_delete=models.CASCADE, verbose_name="商品类目", default=goodcegory.name)
     goods_on = models.CharField("商品唯一货号", max_length=50, default="")
     name = models.CharField("商品名", max_length=100)
     click_num = models.IntegerField("点击数", default=0)
