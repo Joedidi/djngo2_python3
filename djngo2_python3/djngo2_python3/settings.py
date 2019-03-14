@@ -141,9 +141,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # 添加分页功能
-REST_FRAMEWORK = {
-    #分页
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    #每页显示的个数
-    'PAGE_SIZE': 10,
-}
+# REST_FRAMEWORK = {
+#     #分页
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     #每页显示的个数
+#     'PAGE_SIZE': 10,
+# }
