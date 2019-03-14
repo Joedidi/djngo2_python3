@@ -33,7 +33,7 @@ urlpatterns = [
     #文件
     path('media/<path:path>', serve, {'document_root': MEDIA_ROOT}),
 
-    path('goods/', GoodsListView.as_view(), name='goods-list'),
+    # path('goods/', GoodsListView.as_view(), name='goods-list'),
 
     # drf 文档，title自定义
     path('docs/', include_docs_urls(title='杭州立幼网络科技有限公司')),
