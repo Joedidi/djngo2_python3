@@ -18,9 +18,9 @@ from django.urls import path, include
 import xadmin
 from django.views.static import serve
 from djngo2_python3.settings import MEDIA_ROOT
-from goods.view_base import GoodsListView
+# from goods.view_base import GoodsListView
+from goods.views import GoodsListView
 from rest_framework.documentation import include_docs_urls
-
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),

@@ -26,7 +26,7 @@ class GoodsListView(View):
             json_dict = {}
             #获取商品的每个字段，键值对形式
             json_dict['name'] = good.name
-            json_dict['category'] = good.category.name
+            json_dict['category_name'] = good.category_name.name
             json_dict['market_price'] = good.market_price
             json_list.append(json_dict)
 
