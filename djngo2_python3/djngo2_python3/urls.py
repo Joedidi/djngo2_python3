@@ -30,7 +30,7 @@ urlpatterns = [
     path('goods/', GoodsListView.as_view(), name='goods-list'),
 
     # drf 文档，title自定义
-    path('docs', include_docs_urls(title='杭州立幼网络科技有限公司')),
+    path('docs/', include_docs_urls(title='杭州立幼网络科技有限公司')),
 
     path('api-auth/', include('rest_framework.urls')),
 ]
