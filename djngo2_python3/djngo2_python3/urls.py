@@ -21,12 +21,15 @@ from djngo2_python3.settings import MEDIA_ROOT
 # from goods.view_base import GoodsListView
 from goods.views import GoodsListView
 from rest_framework.documentation import include_docs_urls
-from goods.views import GoodsListViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 #配置goods的url
 router.register(r'goods', GoodsListViewSet)
+
+# 配置Category的url
+router.register(r'categorys', CategoryViewSet, base_name="categorys")
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),

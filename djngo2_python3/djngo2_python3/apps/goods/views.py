@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework.views import APIView
-from goods.serializers import GoodsSerializer,GoodsPagination
-from .models import Goods
+from goods.serializers import GoodsSerializer,GoodsPagination, CategorySerializer
+from .models import Goods,GoodsCategory
 from rest_framework.response import Response
 from rest_framework import mixins
 from rest_framework import generics
@@ -46,6 +46,14 @@ class GoodsListView(generics.ListAPIView):
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
 
 
+
+class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    """
+    list:
+        商品分类列表数据
+    """
+    queryset = GoodsCategory.objects.filter(category_type=1)
+    serializer_class = CategorySerializer
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     分页，搜索，排序
@@ -53,10 +61,13 @@ class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     pagination_class = GoodsPagination
-    filter_backends = (DjangoFilterBackend,filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ('name', 'shop_price')
     search_fields = ('name', 'goods_brief')
     ordering_fields = ('sold_num', 'add_time')
+
+
+
 
 
 
