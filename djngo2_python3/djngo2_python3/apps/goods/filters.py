@@ -5,6 +5,7 @@ from django.db.models import Q
 from django_filters import rest_framework as filters
 from goods.models import Goods
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Q
 
 
 class GoodsFilter(filters.FilterSet):
@@ -16,18 +17,15 @@ class GoodsFilter(filters.FilterSet):
     pricemax = filters.NumberFilter(field_name="shop_price", lookup_expr='lte', help_text=_('小于等于本店价格'))
     # 行为: 名称中包含某字符，且字符不区分大小写
     # name = filters.CharFilter(field_name="name" ,lookup_expr="icontains")
-    top_category = filters.NumberFilter(field_name="category", method='top_category_filter')
+    top_category = filters.NumberFilter(field_name="category_name", method='top_category_filter')
 
     def top_category_filter(self, queryset, name, value):
         # 不管当前点击的是一级目录二级目录还是三级目录。
-        return queryset.filter(Q(category_id=value) | Q(category__parent_category_id=value) | Q(
-            category__parent_category__parent_category_id=value))
+        return queryset.filter(Q(category_name_id=value) | Q(category_name__parent_category_id=value) | Q(
+            category_name__parent_category__parent_category_id=value))
 
     class Meta:
         model = Goods
-        fields = ['pricemin', 'pricemax', 'name', 'is_hot', 'is_new']
-        # fields = {
-        #            'shop_price': ['gte','lte', 'icontains'],
-        #            }
+        fields = ['pricemin', 'pricemax']
 
 

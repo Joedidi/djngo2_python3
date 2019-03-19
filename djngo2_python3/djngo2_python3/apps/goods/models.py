@@ -68,7 +68,10 @@ class Goods(models.Model):
     shop_price = models.FloatField("本店价格", default=0)
     goods_brief = models.TextField("商品简短描述", max_length=500)
 
-    goods_desc = UEditorField(verbose_name=u"内容", imagePath="goods/images", width=1000, height=300, filePath="goods/files/", default='')
+    # goods_desc = UEditorField(verbose_name=u"内容", imagePath="goods/images", width=1000, height=300, toolbars="full", filePath="goods/files/", default='')
+    goods_desc = UEditorField('内容', height=300, width=800, max_length=1024000000000,
+                           default=u'', blank=True, imagePath="images/",
+                           toolbars='besttome', filePath='files/')
     ship_free = models.BooleanField("是否承担运费", default=True)
 
 

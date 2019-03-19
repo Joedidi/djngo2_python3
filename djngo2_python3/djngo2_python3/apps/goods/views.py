@@ -54,17 +54,25 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
     """
     queryset = GoodsCategory.objects.filter(category_type=1)
     serializer_class = CategorySerializer
+
+
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
-    分页，搜索，排序
+    商品列表，分页，搜索，过滤，排序
     """
     queryset = Goods.objects.all()
+    # 序列化
     serializer_class = GoodsSerializer
+    # 分页
     pagination_class = GoodsPagination
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
     filter_fields = ('name', 'shop_price')
-    search_fields = ('name', 'goods_brief')
-    ordering_fields = ('sold_num', 'add_time')
+    # 过滤
+    filter_class = GoodsFilter
+    # 搜索
+    search_fields = ('name', 'goods_brief', 'goods_desc')
+    # 排序
+    ordering_fields = ('sold_num', 'shop_price')
 
 
 
