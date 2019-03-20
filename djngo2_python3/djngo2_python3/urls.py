@@ -23,6 +23,8 @@ from goods.views import GoodsListView
 from rest_framework.documentation import include_docs_urls
 from goods.views import GoodsListViewSet, CategoryViewSet
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
 
 router = DefaultRouter()
 #配置goods的url
@@ -44,5 +46,13 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     re_path('^', include(router.urls)),
+
+    # token
+    path('api-token-auth/', views.obtain_auth_token),
+
+    # jwt的token认证接口
+    path('api-token-auth/', obtain_jwt_token),
+    # jwt的认证接口
+    path('login/', obtain_jwt_token)
 ]
 
