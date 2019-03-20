@@ -23,13 +23,14 @@ class YumPian(object):
     def send_sms(self, code, mobile):
         # 需要传递的参数
         parmas = {
-            "apikey":self.api_key,
-            "mobile":mobile,
-            "text":"【杭州立幼网】你的验证码是{code}。如非本人操作，请忽略本短信".format(code=code),
+            "apikey": self.api_key,
+            "mobile": mobile,
+            # "text": "杭州立幼网】你的验证码是{code}。如非本人操作，请忽略本短信".format(code=code),
+            "text": "【肖毅华】您的验证码是{code}。如非本人操作，请忽略本短信".format(code=code),
         }
         response = requests.post(self.single_send_url, data=parmas)
         re_dict = json.loads(response.text)
         return re_dict
 if __name__=="__main__":
-    yum_pian = YumPian("xxxx")
-    yum_pian.send_sms("2018", "手机号码")
+    yum_pian = YumPian("6e5837eac2148f5bec4f3a7249334977")
+    yum_pian.send_sms("2018", "18797829776")
