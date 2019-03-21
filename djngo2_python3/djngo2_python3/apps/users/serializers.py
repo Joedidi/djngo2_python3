@@ -33,23 +33,23 @@ class UserRegSerializer(serializers.ModelSerializer):
                                      "max_length": "验证码格式错误",
                                      "min_length": "验证码格式错误",
                                  },
-                                 help_text="验证码")
+                                 help_text="验证码", label="验证码")
 
     # 验证用户名是否存在
     username = serializers.CharField(label="用户名", help_text="用户名", required=True, allow_blank=False,
                                      validators=[UniqueValidator(queryset=User.objects.all(), message="用户已经存在")])
 
     # 输入密码的时候不显示明文
-    # password = serializers.CharField(
-    #     style={'input_type':'password'}, label=True, write_only=True
-    # )
+    password = serializers.CharField(
+        style={'input_type': 'password'}, label="密码", write_only=True, help_text="密码"
+    )
 
     # 密码加密保存
-    # def create(self, validated_data):
-    #     user = super(UserRegSerializer, self).create(validated_data=validated_data)
-    #     user.set_password(validated_data['password'])
-    #     user.save()
-    #     return user
+    def create(self, validated_data):
+        user = super(UserRegSerializer, self).create(validated_data=validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
     # 验证code
     def validate_code(self, code):
@@ -83,7 +83,7 @@ class UserRegSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'code', 'mobile')
+        fields = ('username', 'code', 'mobile', 'password')
 
 
 
