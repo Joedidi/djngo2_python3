@@ -18,25 +18,25 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from rest_framework_extensions.cache.mixins import CacheResponseMixin
 
 
-# class GoodsListView(APIView):
-#     """
-#     商品列表
-#     """
-#
-#     def get(self, request, format=None):
-#         goods = Goods.objects.all()
-#         goods_serialzer = GoodsSerializer(goods, many=True)
-#         return Response(goods_serialzer.data)
+class GoodsListView(APIView):
+    """
+    商品列表
+    """
 
-# class GoodsListView(mixins.ListModelMixin, generics.GenericAPIView):
-#     """
-#     商品列表
-#     """
-#     queryset = Goods.objects.all()
-#     serializer_class = GoodsSerializer
-#
-#     def get(self,request,*args,**kwargs):
-#         return self.list(request,*args,**kwargs)
+    def get(self, request, format=None):
+        goods = Goods.objects.all()
+        goods_serialzer = GoodsSerializer(goods, many=True)
+        return Response(goods_serialzer.data)
+
+class GoodsListView(mixins.ListModelMixin, generics.GenericAPIView):
+    """
+    商品列表
+    """
+    queryset = Goods.objects.all()
+    serializer_class = GoodsSerializer
+
+    def get(self,request,*args,**kwargs):
+        return self.list(request,*args,**kwargs)
 
 class GoodsListView(generics.ListAPIView):
     '商品列表页'
@@ -58,7 +58,11 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
 
 class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     """
-    商品列表，分页，搜索，过滤，排序
+    list:
+        商品列表，分页，搜索，过滤，排序
+
+    retrieve:
+        获取商品详情
     """
     queryset = Goods.objects.all()
     # 序列化

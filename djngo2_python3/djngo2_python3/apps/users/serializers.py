@@ -113,3 +113,12 @@ class Smserializer(serializers.Serializer):
             raise serializers.ValidationError("距离上一次发送未超过60s")
 
         return mobile
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    """
+    用户详情
+    """
+    class Meta:
+        model = User
+        fields = ("name", "gender", "birthday", "email", "mobile")
+
