@@ -22,14 +22,14 @@ PLUGINS = (
     'multiselect',
     'themes',
     'aggregation',
-    # 'mobile',
+    'mobile',
     'passwords',
     'sitemenu',
     'language',
     'quickfilter',
     'sortablelist',
     'importexport',
-    'Ueditor'
+    'ueditor',
 )
 
 

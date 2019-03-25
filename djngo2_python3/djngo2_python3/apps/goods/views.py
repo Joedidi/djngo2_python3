@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework.views import APIView
-from goods.serializers import GoodsSerializer,GoodsPagination, CategorySerializer
-from .models import Goods,GoodsCategory
+from goods.serializers import GoodsSerializer, GoodsPagination, CategorySerializer
+from .models import Goods, GoodsCategory
 from rest_framework.response import Response
 from rest_framework import mixins
 from rest_framework import generics
@@ -35,8 +35,8 @@ class GoodsListView(mixins.ListModelMixin, generics.GenericAPIView):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
 
-    def get(self,request,*args,**kwargs):
-        return self.list(request,*args,**kwargs)
+    def get(self,request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
 class GoodsListView(generics.ListAPIView):
     '商品列表页'
