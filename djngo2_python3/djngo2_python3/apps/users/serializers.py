@@ -91,7 +91,7 @@ class UserRegSerializer(serializers.ModelSerializer):
 
 
 class Smserializer(serializers.Serializer):
-    mobile = serializers.CharField(max_length=11)
+    mobile = serializers.CharField(max_length=11, help_text="电话")
 
     # 函数名必须：validate+验证字段名
     def validate_mobile(self, mobile):

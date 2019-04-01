@@ -16,11 +16,11 @@ class ShoppingCart(models.Model):
     购物车
     """
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户")
-    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品")
-    nums = models.IntegerField("购买数量", default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户", help_text="用户")
+    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品", help_text="商品")
+    nums = models.IntegerField("购买数量", default=0, help_text="购买数量")
 
-    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
+    add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间", help_text="添加时间")
 
     class Meta:
         verbose_name = "购物车"
@@ -50,28 +50,28 @@ class OrderInfo(models.Model):
 
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="用户", help_text="用户")
     # 订单号唯一
-    order_sn = models.CharField("订单编号", max_length=30, null=True, blank=True, unique=True)
+    order_sn = models.CharField("订单编号", max_length=30, null=True, blank=True, unique=True, help_text="订单编号")
     # 微信支付会用到
-    nonce_str = models.CharField("随机加密串", max_length=50, null=True, blank=True, unique=True)
+    nonce_str = models.CharField("随机加密串", max_length=50, null=True, blank=True, unique=True, help_text="随机加密串")
 
     # 支付宝交易号
-    trade_no = models.CharField("交易号", max_length=100, unique=True, null=True, blank=True)
+    trade_no = models.CharField("交易号", max_length=100, unique=True, null=True, blank=True, help_text="交易号")
     # 支付状态
-    pay_status = models.CharField("订单状态", choices=ORDER_STATUS, default="paying", max_length=10)
+    pay_status = models.CharField("订单状态", choices=ORDER_STATUS, default="paying", max_length=10, help_text="订单状态")
     # 订单的支付状态
-    pay_type = models.CharField("支付类型", choices=PAY_TYPE, default="alipay", max_length=10)
-    post_script = models.FloatField("订单金额", default=0.0)
-    pay_time = models.DateTimeField("支付时间", null=True, blank=True)
+    pay_type = models.CharField("支付类型", choices=PAY_TYPE, default="alipay", max_length=10, help_text="支付类型")
+    post_script = models.FloatField("订单金额", default=0.0, help_text="订单金额")
+    pay_time = models.DateTimeField("支付时间", null=True, blank=True, help_text="支付时间")
 
 
     # 用户信息
-    address = models.CharField("收货地址", max_length=100, default="")
-    signer_name = models.CharField("签收人", max_length=20, default="")
-    signer_mobile = models.CharField("联系电话", max_length=11)
+    address = models.CharField("收货地址", max_length=100, default="", help_text="收货地址")
+    signer_name = models.CharField("签收人", max_length=20, default="", help_text="签收人")
+    signer_mobile = models.CharField("联系电话", max_length=11, help_text="联系电话")
 
-    add_time = models.DateTimeField("添加时间", default=datetime.now)
+    add_time = models.DateTimeField("添加时间", default=datetime.now, help_text="添加时间")
 
     class Meta:
         verbose_name = "订单信息"
@@ -86,13 +86,13 @@ class OrderGoods(models.Model):
     订单内的商品详情
     """
     # 一个订单对应多个商品
-    order = models.ForeignKey(OrderInfo, on_delete=models.CASCADE, verbose_name="订单信息", related_name="goods")
+    order = models.ForeignKey(OrderInfo, on_delete=models.CASCADE, verbose_name="订单信息", related_name="goods", help_text="订单信息")
 
     # 两个外键形成一个关联表
-    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品")
-    goods_num = models.IntegerField("商品数量", default=0)
+    goods = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name="商品", help_text="商品")
+    goods_num = models.IntegerField("商品数量", default=0, help_text="商品数量")
 
-    add_time = models.DateTimeField("添加时间", default=datetime.now)
+    add_time = models.DateTimeField("添加时间", default=datetime.now, help_text="添加时间")
 
     class Meta:
         verbose_name = "订单商品"

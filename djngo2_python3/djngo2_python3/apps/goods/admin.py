@@ -13,14 +13,14 @@ class GoodsAdmin(object):
                     "shop_price", "goods_brief", "goods_desc", "is_new", "is_hot", "add_time"]
 
     # 可以搜索的字段
-    search_fields = ['name',]
+    search_fields = ['name', ]
     # list_editable = ["is_hot",]
     # 过滤器
     list_filter = ["name", "click_num", "sold_num", "fav_num", "goods_num", "market_price",
                    "shop_price", "is_new", "is_hot", "add_time", "category_name"]
 
     # 富文本编辑器
-    style_fields = {"doods_desc": "ueditor"}
+    style_fields = {"goods_desc": "ueditor"}
 
     # 在添加商品的时候可以添加商品图片
     class GoodsImagesInline(object):

@@ -25,6 +25,7 @@ class ShoppingCartViewset(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
     authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
     serializer_class = ShopCartSerializer
+    #　商品的id
     lookup_field = "goods_id"
 
     # 库存数-1
@@ -42,7 +43,7 @@ class ShoppingCartViewset(viewsets.ModelViewSet):
         # 取goods在del之前取之后就被删掉了
         instance.delete()
 
-    # 更新库存
+    # 更新库存, 修改可能是增加页可能是减少
     def perform_update(self, serializer):
         existed_record = ShoppingCart.objects.get(id=serializer.instance.id)
         existed_nums = existed_record.nums
@@ -62,6 +63,8 @@ class ShoppingCartViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return ShoppingCart.objects.filter(user=self.request.user)
+
+
 
 
 class OrderViewset(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin,

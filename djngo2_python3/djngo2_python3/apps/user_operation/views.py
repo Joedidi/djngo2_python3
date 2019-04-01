@@ -5,39 +5,51 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import mixins
 from .models import UserFav, UserLeavingMessage, UserAddress
-from .serializers import UserFavSerializer, LeavingMessageSerializer, AddressSerializer
+from .serializers import UserFavSerializer, LeavingMessageSerializer, AddressSerializer,UserFavDetailSerializer
 from rest_framework.permissions import IsAuthenticated
 from utils.permissions import IsOwnerOrReadOnly
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 
-class UserFavViewset(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin):
+class UserFavViewset(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin):
     """
-    用户收藏
+    list:
+        获取用户收藏列表
+    retrieve:
+        判断某个商品是否已经收藏
+    create:
+        收藏商品
     """
     # queryset = UserFav.objects.all()
-    # serializer_class = UserFavSerializer
-    # permission是用来做权限判断的
-    # IsAuthenticated:必须登录用户；IsOwnerOrReadOnly:必须是当前登录的用户
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
-    # auth使用来做用户认证
+    serializer_class = UserFavSerializer
+    lookup_field = 'goods_id'
+    # lookup_field = 'goods'
     authentication_classes = (JSONWebTokenAuthentication, SessionAuthentication)
 
-    # 搜索的字段
-    lookup_field = 'goods_id'
+    # 收藏数+1
+    # def perform_create(self, serializer):
+    #     instance = serializer.save()
+    #     # 通过这个instance Userfav找到goods
+    #     goods = instance.goods
+    #     goods.fav_num +=1
+    #     goods.save()
 
-    # 动态选择serializer
+    def get_queryset(self):
+        return UserFav.objects.filter(user=self.request.user)
+
+    # 设置动态的Serializer
     def get_serializer_class(self):
         if self.action == "list":
-            return UserFavSerializer
+            return UserFavDetailSerializer
         elif self.action == "create":
             return UserFavSerializer
+
         return UserFavSerializer
 
 
-    def get_queryset(self):
-        # 只能查看当前登录用户的收藏，不会获取所有用户的收藏
-        return UserFav.objects.filter(user=self.request.user)
+
 
 
 class LeavingMessageViewset(mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin,

@@ -21,7 +21,7 @@ from djngo2_python3.settings import MEDIA_ROOT
 # from goods.view_base import GoodsListView
 from goods.views import GoodsListView
 from rest_framework.documentation import include_docs_urls
-from goods.views import GoodsListViewSet, CategoryViewSet
+from goods.views import GoodsListViewSet, CategoryViewSet, BannerViewset, IndexCategoryViewset, HotSearchsViewset
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
@@ -55,6 +55,15 @@ router.register(r'shopcarts', ShoppingCartViewset, base_name="shopcarts")
 
 # 配置订单的url
 router.register(r'order', OrderViewset, base_name="orders")
+
+# 配置首页轮播图
+router.register(r'banners', BannerViewset, base_name="banners")
+
+# 热搜词
+router.register(r'hotsearchs', HotSearchsViewset, base_name="hotsearchs")
+
+# 首页系列商品展示url
+router.register(r"indexgoods", IndexCategoryViewset, base_name="indexgoods")
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),
@@ -76,6 +85,8 @@ urlpatterns = [
     # jwt的token认证接口
     path('api-token-auth/', obtain_jwt_token),
     # jwt的认证接口
-    path('login/', obtain_jwt_token)
+    path('login/', obtain_jwt_token),
+    # 第三方登录
+    path('', include('social_django.urls', namespace='social'))
 ]
 
