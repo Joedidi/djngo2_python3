@@ -26,8 +26,7 @@ SECRET_KEY = '79au)g=(wzn-bd!p_s=czoh@o&q7^yekj&kdn#!kn738^2tu(5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["xiaoyihua.natapp1.cc",
-                 "127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 #重载系统的用户，让UserProfile生效
 AUTH_USER_MODEL = 'users.UserProfile'
@@ -192,14 +191,14 @@ JWT_AUTH = {
 REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
 # 云片网Appkey
-APPKEY = "6e5837eac2148f5bec4f3a7249334977"
+APPKEY = ""
 
 # 第三方登录
-SOCIAL_AUTH_WEIBO_KEY = '2298297533'
-SOCIAL_AUTH_WEIBO_SECRET = '9f3061a05752e21448f65b785f41df5a'
+SOCIAL_AUTH_WEIBO_KEY = ''
+SOCIAL_AUTH_WEIBO_SECRET = ''
 
-SOCIAL_AUTH_QQ_KEY = '101561751'
-SOCIAL_AUTH_QQ_SECRET = 'd176a1a4bfca25ea0776ce330701c211'
+SOCIAL_AUTH_QQ_KEY = ''
+SOCIAL_AUTH_QQ_SECRET = ''
 
 SOCIAL_AUTH_WEIXIN_KEY = 'xxxxxxx'
 SOCIAL_AUTH_WEIXIN_SECRET = 'xxxxxxx'
