@@ -26,7 +26,8 @@ SECRET_KEY = '79au)g=(wzn-bd!p_s=czoh@o&q7^yekj&kdn#!kn738^2tu(5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["xiaoyihua.natapp1.cc",
+                 "127.0.0.1"]
 
 #重载系统的用户，让UserProfile生效
 AUTH_USER_MODEL = 'users.UserProfile'
