@@ -8,7 +8,7 @@
 项目环境：python3.6+django==2.02+djangorestframework
 
 ### 项目结构
-![](image/1.png)
+![](djngo2_python3/image/1.png)
 
 
 ### 项目用途
